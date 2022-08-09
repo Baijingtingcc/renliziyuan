@@ -6,13 +6,21 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { mixin } from '@/utils/mixin'
 
 export default {
   name: 'Dashboard',
+  mixins: [mixin],
   computed: {
     ...mapGetters([
       'name'
     ])
+  },
+  created() {
+    console.log('组价自身的created')
+  },
+  mounted() {
+    console.log('组价自身的mounted')
   }
 }
 </script>
@@ -22,6 +30,7 @@ export default {
   &-container {
     margin: 30px;
   }
+
   &-text {
     font-size: 30px;
     line-height: 46px;

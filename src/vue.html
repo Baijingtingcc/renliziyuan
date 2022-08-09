@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      let data = { msg: "hello" };
+      let vm = {};
+      Object.defineProperty(vm, "msg", {
+        configurable: true,
+        get() {
+          console.log("get:", data.msg);
+          return data.msg;
+        },
+        set(val) {
+          console.log("set:", data.msg);
+          if (val === data.msg) {
+            return;
+          }
+          data.msg = val;
+          document.querySelector("#app").textContent = data.msg;
+        },
+      });
+      vm.msg = "hello World";
+      console.log(vm.msg);
+    </script>
+  </body>
+</html>
