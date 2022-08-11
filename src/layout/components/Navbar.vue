@@ -13,15 +13,18 @@
     </div>
 
     <div class="right-menu">
+      <Lang class="item" />
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="$store.getters.avatar" class="user-avatar" v-imagerror="defaultImg">
+          <ThemePicker class="item theme" />
+          <ScreenFull class="item" />
+          <img v-imagerror="defaultImg" :src="$store.getters.avatar" class="user-avatar">
           <span class="name">管理员</span>
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <router-link to="/">
-            <el-dropdown-item> 首页 </el-dropdown-item>
+            <el-dropdown-item> 首页</el-dropdown-item>
           </router-link>
           <a
             target="_blank"
@@ -42,6 +45,7 @@
 import { mapGetters } from 'vuex'
 import Hamburger from '@/components/Hamburger'
 import defaultImg from '@/assets/common/bigUserHeader.png'
+
 export default {
   components: {
     Hamburger
@@ -74,6 +78,7 @@ export default {
   position: relative;
   // background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+
   .app-breadcrumb {
     display: inline-block;
     font-size: 18px;
@@ -81,6 +86,7 @@ export default {
     margin-left: 10px;
     color: #ffffff;
     cursor: text;
+
     .breadBtn {
       background: #84a9fe;
       font-size: 14px;
@@ -114,9 +120,20 @@ export default {
     float: right;
     height: 100%;
     line-height: 50px;
+    display: flex;
+    align-items: center;
+
+    .theme {
+      height: unset;
+    }
+
+    .item {
+      margin-right: 20px;
+    }
 
     &:focus {
       outline: none;
+      cursor: pointer;
     }
 
     .right-menu-item {
@@ -139,9 +156,10 @@ export default {
 
     .avatar-container {
       margin-right: 30px;
+
       .avatar-wrapper {
         display: flex;
-       align-items: center;
+        align-items: center;
         // margin-top: 5px;
         position: relative;
 
@@ -152,11 +170,13 @@ export default {
           border-radius: 15px;
           // margin-top: 5px;
         }
+
         .name {
           color: #fff;
           // margin-bottom: 5px;
           margin-left: 10px;
         }
+
         .user-dropdown {
           color: #fff;
         }

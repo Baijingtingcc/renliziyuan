@@ -35,16 +35,20 @@ export function timeAgo(time) {
  */
 export function numberFormatter(num, digits) {
   const si = [
-    { value: 1E18, symbol: 'E' },
-    { value: 1E15, symbol: 'P' },
-    { value: 1E12, symbol: 'T' },
-    { value: 1E9, symbol: 'G' },
-    { value: 1E6, symbol: 'M' },
-    { value: 1E3, symbol: 'k' }
+    { value: 1e18, symbol: 'E' },
+    { value: 1e15, symbol: 'P' },
+    { value: 1e12, symbol: 'T' },
+    { value: 1e9, symbol: 'G' },
+    { value: 1e6, symbol: 'M' },
+    { value: 1e3, symbol: 'k' }
   ]
   for (let i = 0; i < si.length; i++) {
     if (num >= si[i].value) {
-      return (num / si[i].value).toFixed(digits).replace(/\.0+$|(\.[0-9]*[1-9])0+$/, '$1') + si[i].symbol
+      return (
+        (num / si[i].value)
+          .toFixed(digits)
+          .replace(/\.0+$|(\.[0-9]*[1-9])0+$/, '$1') + si[i].symbol
+      )
     }
   }
   return num.toString()
@@ -55,7 +59,9 @@ export function numberFormatter(num, digits) {
  * @param {number} num
  */
 export function toThousandFilter(num) {
-  return (+num || 0).toString().replace(/^-?\d+/g, m => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
+  return (+num || 0)
+    .toString()
+    .replace(/^-?\d+/g, (m) => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
 }
 
 /**
@@ -137,6 +143,7 @@ export function formatTime(time, option) {
     )
   }
 }
+
 export function getNowFormatDate() {
   var date = new Date()
   var seperator1 = '-'
@@ -152,32 +159,34 @@ export function getNowFormatDate() {
   var currentdate = year + seperator1 + month + seperator1 + strDate
   return currentdate
 }
+
 /* 数字 格式化 */
 export function nFormatter(num, digits) {
-  const si = [{
-    value: 1e18,
-    symbol: 'E'
-  },
-  {
-    value: 1e15,
-    symbol: 'P'
-  },
-  {
-    value: 1e12,
-    symbol: 'T'
-  },
-  {
-    value: 1e9,
-    symbol: 'G'
-  },
-  {
-    value: 1e6,
-    symbol: 'M'
-  },
-  {
-    value: 1e3,
-    symbol: 'k'
-  }
+  const si = [
+    {
+      value: 1e18,
+      symbol: 'E'
+    },
+    {
+      value: 1e15,
+      symbol: 'P'
+    },
+    {
+      value: 1e12,
+      symbol: 'T'
+    },
+    {
+      value: 1e9,
+      symbol: 'G'
+    },
+    {
+      value: 1e6,
+      symbol: 'M'
+    },
+    {
+      value: 1e3,
+      symbol: 'k'
+    }
   ]
   for (let i = 0; i < si.length; i++) {
     if (num >= si[i].value) {
@@ -200,8 +209,9 @@ export function html2Text(val) {
 export function toThousandslsFilter(num) {
   return (+num || 0)
     .toString()
-    .replace(/^-?\d+/g, m => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
+    .replace(/^-?\d+/g, (m) => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
 }
+
 // 验证手机号
 export function checkPhone(rule, value, callback) {
   if (!value) {
@@ -215,6 +225,7 @@ export function checkPhone(rule, value, callback) {
     }
   }
 }
+
 export function checkPassword(rule, value, callback) {
   if (!value) {
     return callback(new Error('密码不能为空'))
@@ -224,21 +235,25 @@ export function checkPassword(rule, value, callback) {
     callback()
   }
 }
+
 // 手机号证验证
 export function checkTel(value, callback) {
   var reg = /^1[3|4|5|7|8][0-9]\d{8}$/
   return reg.test(value)
 }
+
 // 身份证验证
 export function checkiDNumber(value, callback) {
   var reg = /\d{17}[\d|x]|\d{15}/
   return reg.test(value)
 }
+
 // 身份证验证
 export function checkEmails(value, callback) {
   var reg = /^[A-Za-zd]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/
   return reg.test(value)
 }
+
 // 邮箱验证
 export function checkEmail(rule, value, callback) {
   if (!value) {
@@ -252,30 +267,38 @@ export function checkEmail(rule, value, callback) {
     }
   }
 }
+
 // 英文验证
 export function checkCode(value, callback) {
   var reg = /^[A-Za-z]+$/g
   return reg.test(value)
 }
+
 // qq验证
 export function checkQq(value, callback) {
   var reg = /^[0-9]+$/g
   return reg.test(value)
 }
+
 // 银行卡号
 export function formatBankNo(BankNo, callback) {
-  var strBin = '10,18,30,35,37,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,58,60,62,65,68,69,84,87,88,94,95,98,99'
+  var strBin =
+    '10,18,30,35,37,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,58,60,62,65,68,69,84,87,88,94,95,98,99'
   return strBin
 }
+
 export function getStrleng(str, max) {
   var myLen = 0
   for (var i = 0; i < str.length && myLen <= max * 2; i++) {
     if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128) {
       myLen++
-    } else myLen += 2
+    } else {
+      myLen += 2
+    }
   }
   return myLen
 }
+
 // 上传图片格式控制
 export function updatedImg(file, obj, callback, func) {
   if (file.size < 10100000) {
@@ -302,6 +325,7 @@ export function updatedImg(file, obj, callback, func) {
     return false
   }
 }
+
 // 上传文档格式控制
 export function updatedFile(file, obj, callback, func) {
   if (file.size < 10100000) {
@@ -330,16 +354,14 @@ export function updatedFile(file, obj, callback, func) {
     return false
   }
 }
+
 export function importFile(file, obj, callback, func) {
   if (file.size < 10100000) {
     var fileName = file.name
     var suffix = fileName
       .substring(fileName.lastIndexOf('.') + 1)
       .toUpperCase()
-    if (
-      suffix === 'XLS' ||
-      suffix === 'XLSX'
-    ) {
+    if (suffix === 'XLS' || suffix === 'XLSX') {
       return true
     } else {
       var tipType = '文件类型不正确,请重新上传'
@@ -352,6 +374,7 @@ export function importFile(file, obj, callback, func) {
     return false
   }
 }
+
 export function minHeight(resfile) {
   return document.body.clientHeight - 180 + 'px'
 }
@@ -361,7 +384,10 @@ export function formatDate(date, fmt = 'yyyy-MM-dd') {
     date = new Date(date)
   }
   if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
+    fmt = fmt.replace(
+      RegExp.$1,
+      (date.getFullYear() + '').substr(4 - RegExp.$1.length)
+    )
   }
   const o = {
     'M+': date.getMonth() + 1,
@@ -373,7 +399,10 @@ export function formatDate(date, fmt = 'yyyy-MM-dd') {
   for (const k in o) {
     if (new RegExp(`(${k})`).test(fmt)) {
       const str = o[k] + ''
-      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? str : padLeftZero(str))
+      fmt = fmt.replace(
+        RegExp.$1,
+        RegExp.$1.length === 1 ? str : padLeftZero(str)
+      )
     }
   }
   return fmt
@@ -382,6 +411,7 @@ export function formatDate(date, fmt = 'yyyy-MM-dd') {
 function padLeftZero(str) {
   return ('00' + str).substr(str.length)
 }
+
 export function getBlob(response) {
   const blob = new Blob([response.data], {
     type: 'application/vnd.ms-excel'
@@ -393,7 +423,12 @@ export function getBlob(response) {
   link.download = filename
   link.click()
 }
+
 // 图片 blob 流转化为可用 src
 export function imgHandle(obj) {
   return window.URL.createObjectURL(obj)
+}
+
+export function importFilexml(a, b) {
+  return 12345
 }
